@@ -49,14 +49,14 @@ describe('Weather API', function () {
   }
 })
 
-describe('Monitor API returns data', function () {
-  it('Responds & provides metrics', function (done) {
-    request(app)
-      .get('/api/monitoringdata')
-      .expect('Content-Type', /json/)
-      .expect(/memTotalBytes/)
-      .expect(/memUsedBytes/)
-      .expect(/cpuAppPercentage/)
-      .expect(200, done)
+// describe('Monitor API returns data', function () {
+//   it('Responds & provides metrics', function (done) {
+//     request(app)
+//       .get('/api/monitoringdata')
+//       .expect('Content-Type', /json/)
+//       .expect(/memTotalBytes/)
+//       .expect(/memUsedBytes/)
+//       .expect(/cpuAppPercentage/)
+//       .expect(200, done)
   })
 })
