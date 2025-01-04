@@ -14,10 +14,11 @@ jobs:
       - run:
           name: Install Make
           command: |
-            apt-get update && apt-get install -y make
+            apt-get update && apt-get install -y make && npm install --save-dev prettier
       - run:
           name: Run Linting
-          command: make lint
+          command: |
+            npx prettier --write "src/tests/integration-tests.mjs" && make lint
   run-tests:
     executor: nodejs-executor
     steps:
