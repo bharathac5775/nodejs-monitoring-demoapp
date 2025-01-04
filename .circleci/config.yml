@@ -20,7 +20,10 @@ jobs:
       - run:
           name: Install Make and Prettier
           command: |
-             apk update && apk add --no-cache make && npm install --save-dev prettier
+            apk update && apk add --no-cache make && npm install --save-dev prettier
+      - run:
+          name: Check if make is installed
+          command: make --version
       - run:
           name: Run Linting
           command: |
