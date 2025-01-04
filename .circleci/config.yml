@@ -31,12 +31,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check OS Release
-          command: cat /etc/os-release
-      - run:
-          name: Update Node Modules
-          command: npm update
-      - run:
           name: Run Testing
           command: make run
 
