@@ -18,9 +18,20 @@ jobs:
       - run:
           name: Run Linting
           command: make lint
+  run-tests:
+    executor: nodejs-executor
+    steps:
+      - checkout
+      - run:
+         name: Run testing
+         command: make run
+
 
 workflows:
   version: 2
   test-and-deploy:
     jobs:
       - run-lints
+      - run-tests:
+         requires:
+           - run-lints
