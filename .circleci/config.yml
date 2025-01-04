@@ -23,8 +23,8 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Run testing
-         command: make run
+          name: Run testing
+          command: make run
 
 
 workflows:
