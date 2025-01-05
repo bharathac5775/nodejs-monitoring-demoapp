@@ -56,7 +56,7 @@ version: 2.1
 executors:
   nodejs-executor:
     docker:
-      - image: node:16
+      - image: circleci/node:16.13-browsers-legacy
     working_directory: ~/repo
 
 jobs:
