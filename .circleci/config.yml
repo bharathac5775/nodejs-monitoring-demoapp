@@ -62,9 +62,6 @@ executors:
   docker-executor:
     docker:
       - image: docker:20.10.16
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
     working_directory: ~/repo
 
 jobs:
@@ -78,11 +75,11 @@ jobs:
       - run:
           name: Install Make and Prettier
           command: |
-              apt-get update &&  apt-get install -y make 
+            apt-get update && apt-get install -y make
       - run:
           name: Run Linting
           command: |
-              make lint
+            make lint
 
   run-tests:
     executor: nodejs-executor
@@ -102,7 +99,8 @@ jobs:
       IMAGE_TAG: v1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.16
       - run:
           name: Log in to Docker Registry
           command: |
@@ -122,9 +120,10 @@ workflows:
       - run-tests:
           requires:
             - run-lints
-      - build image:
+      - build-image:
           requires:
             - run-tests
+
 
 # version: 2.1
 
