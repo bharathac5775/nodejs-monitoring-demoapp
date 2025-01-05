@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Run Linting
           command: |
-            npx prettier --write "src/tests/integration-tests.mjs" && make lint
+              make lint
 
   run-tests:
     executor: nodejs-executor
