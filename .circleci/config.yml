@@ -135,7 +135,7 @@ jobs:
           command: npm update
       - run:
           name: Run Testing
-          command: make run
+          command: make test
 
 workflows:
   version: 2
