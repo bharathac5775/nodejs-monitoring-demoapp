@@ -64,9 +64,9 @@ jobs:
     executor: nodejs-executor
     steps:
       - checkout
-      # - run:
-      #     name: Update Node Modules
-      #     command: npm update
+      - run:
+          name: Update Node Modules
+          command: npm update
       - run:
           name: Install Make and Prettier
           command: |
@@ -80,9 +80,9 @@ jobs:
     executor: nodejs-executor
     steps:
       - checkout
-      # - run:
-      #     name: Update Node Modules
-      #     command: npm update
+      - run:
+          name: Update Node Modules
+          command: npm update
       - run:
           name: Run Testing
           command: make run
