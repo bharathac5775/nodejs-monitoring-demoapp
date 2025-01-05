@@ -51,6 +51,51 @@
 #             - run-lints
 
 
+# version: 2.1
+
+# executors:
+#   nodejs-executor:
+#     docker:
+#       - image: circleci/node:16.13-browsers-legacy
+#     working_directory: ~/repo
+
+# jobs:
+#   run-lints:
+#     executor: nodejs-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: Update Node Modules
+#           command: npm update
+#       - run:
+#           name: Install Make and Prettier
+#           command: |
+#              sudo apt-get update && sudo apt-get install -y make 
+#       - run:
+#           name: Run Linting
+#           command: |
+#               make lint
+
+#   run-tests:
+#     executor: nodejs-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: Update Node Modules
+#           command: npm update
+#       - run:
+#           name: Run Testing
+#           command: make run
+
+# workflows:
+#   version: 2
+#   test-and-deploy:
+#     jobs:
+#       - run-lints
+#       - run-tests:
+#           requires:
+#             - run-lints
+
 version: 2.1
 
 executors:
@@ -65,16 +110,21 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Fix Repository GPG Issues
+          command: |
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E88979FB9B30ACF2 || true
+            sudo sed -i '/dl.google.com/d' /etc/apt/sources.list /etc/apt/sources.list.d/*.list
+      - run:
           name: Update Node Modules
           command: npm update
       - run:
           name: Install Make and Prettier
           command: |
-             sudo apt-get update && sudo apt-get install -y make 
+            sudo apt-get update && sudo apt-get install -y make
       - run:
           name: Run Linting
           command: |
-              make lint
+            make lint
 
   run-tests:
     executor: nodejs-executor
@@ -95,4 +145,3 @@ workflows:
       - run-tests:
           requires:
             - run-lints
-
