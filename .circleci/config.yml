@@ -1,9 +1,62 @@
+# version: 2.1
+
+# executors:
+#   nodejs-executor:
+#     docker:
+#       - image: node:16-alpine
+#     working_directory: ~/repo
+
+# jobs:
+#   run-lints:
+#     executor: nodejs-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: Check OS Release
+#           command: cat /etc/os-release
+#       - run:
+#           name: Update Node Modules
+#           command: npm update
+#       - run:
+#           name: Install Make and Prettier
+#           command: |
+#             apk update && apk add --no-cache make && npm install --save-dev prettier
+#       - run:
+#           name: Check if make is installed
+#           command: make --version
+#       - run:
+#           name: Run Linting
+#           command: |
+#             npx prettier --write "src/tests/integration-tests.mjs" && make lint
+
+#   run-tests:
+#     executor: nodejs-executor
+#     steps:
+#       - checkout
+#       - run:
+#           name: Install Make 
+#           command: |
+#             apk update && apk add --no-cache make
+#       - run:
+#           name: Run Testing
+#           command: make run
+
+# workflows:
+#   version: 2
+#   test-and-deploy:
+#     jobs:
+#       - run-lints
+#       - run-tests:
+#           requires:
+#             - run-lints
+
+
 version: 2.1
 
 executors:
   nodejs-executor:
     docker:
-      - image: node:16-alpine
+      - image: node:16
     working_directory: ~/repo
 
 jobs:
@@ -12,18 +65,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check OS Release
-          command: cat /etc/os-release
-      - run:
           name: Update Node Modules
           command: npm update
       - run:
           name: Install Make and Prettier
           command: |
-            apk update && apk add --no-cache make && npm install --save-dev prettier
-      - run:
-          name: Check if make is installed
-          command: make --version
+            apt-get update && apt-get install -y make && npm install --save-dev prettier
       - run:
           name: Run Linting
           command: |
@@ -34,9 +81,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Make 
-          command: |
-            apk update && apk add --no-cache make
+          name: Update Node Modules
+          command: npm update
       - run:
           name: Run Testing
           command: make run
@@ -49,3 +95,4 @@ workflows:
       - run-tests:
           requires:
             - run-lints
+
