@@ -64,13 +64,13 @@ jobs:
     executor: nodejs-executor
     steps:
       - checkout
-      - run:
-          name: Update Node Modules
-          command: npm update
+      # - run:
+      #     name: Update Node Modules
+      #     command: npm update
       - run:
           name: Install Make and Prettier
           command: |
-            apt-get update && apt-get install -y make && npm install --save-dev prettier
+             sudo apt-get update && sudo apt-get install -y make && npm install --save-dev prettier
       - run:
           name: Run Linting
           command: |
@@ -80,9 +80,9 @@ jobs:
     executor: nodejs-executor
     steps:
       - checkout
-      - run:
-          name: Update Node Modules
-          command: npm update
+      # - run:
+      #     name: Update Node Modules
+      #     command: npm update
       - run:
           name: Run Testing
           command: make run
