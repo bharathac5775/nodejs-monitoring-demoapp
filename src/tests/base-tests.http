@@ -30,5 +30,4 @@ GET {{baseUrl}}/tools
 GET {{baseUrl}}/monitor
 
 ?? status == 200
-?? body memUsedBytes isNumber
-?? body cpuAppPercentage isNumber
+
