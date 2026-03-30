@@ -186,17 +186,19 @@ jobs:
             cd src
             npm ci      
       - run:
-          name: Start App
+          name: Start App and run test
           command: |
             cd src
             npm start &
-      - run:
-          name: Wait for server
-          command: |
             npx wait-on http://localhost:3000
-      - run:
-          name: Run Testing
-          command: make test
+            make test
+      # - run:
+      #     name: Wait for server
+      #     command: |
+      #       npx wait-on http://localhost:3000
+      # - run:
+      #     name: Run Testing
+      #     command: make test
           
   build-image:
     executor: docker-executor
