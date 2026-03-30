@@ -27,7 +27,7 @@ GET {{baseUrl}}/tools
 
 
 ### Base - Monitor API
-GET {{baseUrl}}/api/monitoringdata
+GET {{baseUrl}}/monitor
 
 ?? status == 200
 ?? body memUsedBytes isNumber
