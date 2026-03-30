@@ -208,10 +208,9 @@ jobs:
       IMAGE_TAG: v1
     steps:
       - checkout
+      
       - setup_remote_docker
-      - restore_cache:
-          keys:
-            - docker-layers-cache
+          docker_layer_caching: true
       - run:
           name: Log in to Docker Registry
           command: |
@@ -219,11 +218,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build --cache-from=type=local,src=/tmp/docker-cache -t $IMAGE_NAME:$IMAGE_TAG .
-      - save_cache:
-          paths:
-            - /tmp/docker-cache
-          key: docker-layers-cache
+            docker build -t $IMAGE_NAME:$IMAGE_TAG .
       - run:
           name: Push Docker Image
           command: docker push $IMAGE_NAME:$IMAGE_TAG
