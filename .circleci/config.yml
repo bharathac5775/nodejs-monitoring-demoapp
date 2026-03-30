@@ -167,9 +167,7 @@ jobs:
             apt-get update && apt-get install -y make
       - run:
           name: Run Linting
-          command: |
-            cd src
-            make lint
+          command: make lint
 
   run-tests:
     executor: nodejs-executor
