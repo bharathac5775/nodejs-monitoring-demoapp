@@ -146,6 +146,12 @@ jobs:
             - node-modules-{{ checksum "package-lock.json" }}
             - node-modules-
       - run:
+          name: Debug files
+          command: |
+            pwd
+            ls -la
+            ls -la src
+      - run:
           # name: Update Node Modules
           # command: npm update
           name: Install Dependencies
