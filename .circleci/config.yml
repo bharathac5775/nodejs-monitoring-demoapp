@@ -128,7 +128,7 @@ version: 2.1
 executors:
   nodejs-executor:
     docker:
-      - image: node:20
+      - image: node:20.11
     working_directory: ~/repo/src
 
   docker-executor:
@@ -150,7 +150,6 @@ jobs:
           command: |
             pwd
             ls -la
-            ls -la src
       - run:
           # name: Update Node Modules
           # command: npm update
