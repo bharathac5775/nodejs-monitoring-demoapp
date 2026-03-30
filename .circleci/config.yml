@@ -129,7 +129,7 @@ executors:
   nodejs-executor:
     docker:
       - image: node:20.11
-    working_directory: ~/repo/src
+    working_directory: ~/repo
 
   docker-executor:
     docker:
@@ -154,7 +154,9 @@ jobs:
           # name: Update Node Modules
           # command: npm update
           name: Install Dependencies
-          command: npm ci
+          command: |
+            cd src
+            npm ci
       - save_cache:
           paths:
             - ./node_modules
