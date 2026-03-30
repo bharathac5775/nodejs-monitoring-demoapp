@@ -128,8 +128,8 @@ version: 2.1
 executors:
   nodejs-executor:
     docker:
-      - image: node:16
-    working_directory: ~/repo
+      - image: node:20
+    working_directory: ~/repo/src
 
   docker-executor:
     docker:
@@ -146,14 +146,16 @@ jobs:
             - node-modules-{{ checksum "package-lock.json" }}
             - node-modules-
       - run:
-          name: Update Node Modules
-          command: npm update
+          # name: Update Node Modules
+          # command: npm update
+          name: Install Dependencies
+          command: npm ci
       - save_cache:
           paths:
             - ./node_modules
           key: node-modules-{{ checksum "package-lock.json" }}
       - run:
-          name: Install Make and Prettier
+          name: Install Make
           command: |
             apt-get update && apt-get install -y make
       - run:
