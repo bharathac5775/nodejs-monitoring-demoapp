@@ -175,11 +175,16 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-modules-{{ checksum "package-lock.json" }}
+            - node-modules-{{ checksum "src/package-lock.json" }}
             - node-modules-
+      # - run:
+      #     name: Update Node Modules
+      #     command: npm update
       - run:
-          name: Update Node Modules
-          command: npm update
+          name: Install Dependencies
+          command: |
+            cd src
+            npm ci      
       - run:
           name: Run Testing
           command: make test
