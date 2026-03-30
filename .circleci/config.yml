@@ -190,6 +190,7 @@ jobs:
           command: |
             cd src
             npm start &
+            cd ..
             npx wait-on http://localhost:3000
             make test
       # - run:
