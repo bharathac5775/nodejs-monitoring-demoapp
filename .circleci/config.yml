@@ -159,8 +159,8 @@ jobs:
             npm ci
       - save_cache:
           paths:
-            - ./node_modules
-          key: node-modules-{{ checksum "package-lock.json" }}
+            - src/node_modules
+          key: node-modules-{{ checksum "src/package-lock.json" }}
       - run:
           name: Install Make
           command: |
@@ -168,6 +168,7 @@ jobs:
       - run:
           name: Run Linting
           command: |
+            cd src
             make lint
 
   run-tests:
