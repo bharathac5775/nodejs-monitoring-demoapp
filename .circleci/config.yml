@@ -188,7 +188,7 @@ jobs:
       - run:
           name: Start App
           command: |
-            cd arc
+            cd src
             npm start &
             sleep 5
       - run:
